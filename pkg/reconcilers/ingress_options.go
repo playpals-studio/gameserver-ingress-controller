@@ -223,7 +223,7 @@ func WithTLSCertIssuer(issuerName string) IngressOption {
 		}
 
 		secret, ok := gameserver.HasAnnotation(gs, gameserver.OctopsAnnotationsTLSSecretName)
-		if ok {
+		if ok && len(secret) != 0 {
 			return nil
 		}
 
