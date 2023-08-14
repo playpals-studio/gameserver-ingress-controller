@@ -222,6 +222,11 @@ func WithTLSCertIssuer(issuerName string) IngressOption {
 			return nil
 		}
 
+		secret, ok := gameserver.HasAnnotation(gs, gameserver.OctopsAnnotationsTLSSecretName)
+		if ok {
+			return nil
+		}
+
 		if terminateTLS, err := strconv.ParseBool(terminate); err != nil {
 			return errors.Errorf("annotation %s for %s must be \"true\" or \"false\"", gameserver.OctopsAnnotationTerminateTLS, gs.Name)
 		} else if terminateTLS == false {
